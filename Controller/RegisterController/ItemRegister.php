@@ -19,7 +19,7 @@ if(isset($_POST['Confirm']))
 {
 
 
-	$vID = $_POST['vendorID'];
+	$vID = $_POST['vendorID'];     
 	$iType = $_POST['itemType'];
 	$iID = $_POST['itemID'];
 	$iName = $_POST['itemName'];

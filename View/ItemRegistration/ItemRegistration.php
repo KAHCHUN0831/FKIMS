@@ -250,6 +250,8 @@ input
 						<input type="submit" value="Submit" name="Confirm" onclick="addItem()">
 						<input type="reset">
 					  </center>
+            <a href="../ManageVendor/managevendor.php" class ="button">Display Vendor Details </a>
+					  
 					  
 					</form> 
 					
