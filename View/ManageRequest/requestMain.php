@@ -121,9 +121,9 @@ th
 
 <script type="text/javascript"> 
 	  
-	  function deleteRequest() 
+    function deleteRequest() 
 	  {
-				alert("Request Deleted from Database");
+				return confirm('Are you sure you want to delete this record?');
 			
 	  }
 	  
@@ -282,7 +282,7 @@ th
 					<a href="../../Controller/RequestController/changeStatus.php?GetID=<?php echo $row['RequestID'];?>"><input type="button" value="Accept"></a>
 					</form>
 					
-					<a href="../../Controller/RequestController/deleteRequest.php?DeleteID=<?php echo $row['RequestID'];?>"><input style="background-color:red;" type="button" name="Delete" value="Delete" onclick="deleteRequest()"></a></td>
+					<a href="../../Controller/RequestController/deleteRequest.php?DeleteID=<?php echo $row['RequestID'];?>"><input style="background-color:red;" type="button" name="Delete" value="Delete" onclick="return deleteRequest()"></a></td>
                 </tr>
                 <?php endwhile;?>
             </table>
