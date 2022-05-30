@@ -185,27 +185,27 @@ input[type=button]:hover
 			</div>
 			<div class="input_field">
 				<label>Vendor Name</label>
-				<input type="text" name="vendor_name" class="input">				
+				<input type="text" name="vendor_name" class="input" required>				
 			</div>
 			<div class="input_field">
 				<label>Vendor Address</label>
-				<input type="text" name="vendor_address" class="input">				
+				<input type="text" name="vendor_address" class="input" required>				
 			</div>
 			<div class="input_field">
 				<label>Vendor Phone Number</label>
-				<input type="text" name="vendor_phone" class="input">				
+				<input type="text" name="vendor_phone" class="input" required>				
 			</div>
 			<div class="input_field">
 				<label>Vendor Email</label>
-				<input type="text" name="vendor_email" class="input">				
+				<input type="text" name="vendor_email" class="input" required>				
 			</div>
 			<div class="input_field">
 				<label>Vendor Item</label>
-				<input type="text" name="vendor_item" class="input">				
+				<input type="text" name="vendor_item" class="input" required>				
 			</div>
 			<div>
 				<br>
-				<input type="submit" class="btn" name="Add" value="Add">
+				<input type="submit" class="btn" name="Add" value="Add" required>
 			</div>
 			<div>
 				
