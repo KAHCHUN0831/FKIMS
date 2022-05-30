@@ -181,7 +181,7 @@ input[type=button]:hover
 			<form method="post" action="../../Controller/VendorController/insertvendor.php">
 			<div class="input_field">
 				<label>Vendor ID</label>
-				<input type="text" name="vendorID" class="input">				
+				<input type="text" name="vendorID" class="input" required>				
 			</div>
 			<div class="input_field">
 				<label>Vendor Name</label>
