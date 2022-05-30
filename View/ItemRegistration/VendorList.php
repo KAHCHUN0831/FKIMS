@@ -258,10 +258,50 @@ input
 					  <br>
 					  <br>
 						<input type="submit" value="Submit" name="Confirm" onclick="addItem()">
-						<input type="reset">					
+						<input type="reset">
+						<a href="../ItemRegistration/deleteItem.php" class ="button">Delete Item </a>
 					  </center>
-					  <a href="../ItemRegistration/VendorList.php" class ="button">Display Vendor Details </a>
-					  <a href="../ItemRegistration/deleteItem.php" class ="button">Delete Item </a>
+					  <br>
+					  <br>
+	<div class="display">
+		<div class="ta">
+			<table style="width:100%"; style="border-collapse:collapse;">
+				<tr>
+					<th>Vendor ID</th>
+					<th>Vendor Name</th>
+					<th>Vendor's Item</th>	
+				</tr>
+
+				<?php
+				include_once ("../../Controller/VendorController/insertvendor.php");
+			
+				$query = "SELECT * FROM vendor_list";
+				$result = mysqli_query($conn,$query);
+					
+					
+					if ($result-> num_rows > 0){
+						while ($row = $result-> fetch_assoc()){
+							
+							$uID = $row['vendorID'];
+							
+						?>
+						
+						<tr>
+							
+						<td><?php echo $row["vendorID"];?></td>
+						<td><?php echo $row["vendor_name"];?></td>
+						<td><?php echo $row["vendor_item"];?></td>
+						<td style="text-align:center;">
+											
+						</tr>
+						<?php
+						}
+					}
+					?>
+				</table>
+						
+		</div>
+	</div>
 					  
 					</form> 
 					

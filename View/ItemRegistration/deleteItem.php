@@ -125,9 +125,15 @@ input
   
 <script type="text/javascript">
 	  
-
+	
+		  function deleteItem() 
+	  {
+				alert("Item Deleted from Database");
+			
+	  }
 	  
 	</script>
+	
 	
 </head>
 
@@ -192,7 +198,7 @@ input
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline text-center">
-              <h2>Register Item</h2>
+              <h2>Delete Item</h2>
             </div>
           </div>
         </div>
@@ -202,71 +208,63 @@ input
  <center> 
 
 				
-     	<?php if (isset($_GET['error'])) { ?>
-     		<p class="error"><?php echo $_GET['error']; ?></p>
-     	<?php } ?>
+     		<div class="display">
+		<div class="ta">
+			<table style="width:100%"; style="border-collapse:collapse;">
+				<tr>
+					<th>Vendor ID</th>
+					<th>Item Type</th>
+					<th>Item ID</th>
+					<th>Item Name</th>
+					<th>Item Quantity</th>
+					<th>Item Register Time</th>	
+					<th>Item Register Date</th>	
+					<th>Section ID</th>	
+					<th>Item Description</th>	
+					<th></th>		
+				</tr>
+				<br>
+				<a href="../ItemRegistration/VendorList.php" class ="button">Back</a>
 
-					<form name="additem" action="../../Controller/RegisterController/ItemRegister.php" method="post">
-					  <center>
-					  <table>
-					  <tr>
-					  <th><label for="vendorID">Vendor ID:</label></th>
-					  <td><input type="text" id="vendorID" name="vendorID" placeholder="Enter Vendor ID"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="itemType">Item Type:</label></th>
-					  <td><input type="text" id="itemType" name="itemType" placeholder="Enter Item Type"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="itemID">Item ID:</label></th>
-					  <td><input type="text" id="itemID" name="itemID" placeholder="Enter Item ID"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="itemName">Item Name:</label></th>
-					  <td><input type="text" id="itemName" name="itemName" placeholder="Enter Item Name"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="itemQ">Item Quantity:</label></th>
-					  <td><input type="number" id="itemQ" name="itemQ" placeholder="Enter Item Quantity"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="itemPrice">Item Price:</label></th>
-					  <td><input type="number" step="any" id="itemPrice" name="itemPrice" placeholder="Enter Item Price"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="RegTime">Item Register Time:</label></th>
-					  <td><input type="time" id="RegTime" name="RegTime" placeholder="Enter Register Time"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="RegDate">Item Register Date:</label></th>
-					  <td><input type="date" id="RegDate" name="RegDate" placeholder="Enter Register Date"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="Desc">Section ID:</label></th>
-					  <td><input type="text" id="sec" name="sec" placeholder="Enter Section ID"><br></td>
-					  </tr>
-					  <tr>
-					  <th><label for="Desc">Item Description:</label></th>
-					  <td colspan="3"><input style="width:485px" type="text" id="Desc" name="Desc" placeholder="Enter Item Description"><br></td>
-					  </tr>
-					  
-					  <br>
-					  
-					  </center>
-					   </table>
-					  <center>
-					  <br>
-					  <br>
-						<input type="submit" value="Submit" name="Confirm" onclick="addItem()">
-						<input type="reset">					
-					  </center>
-					  <a href="../ItemRegistration/VendorList.php" class ="button">Display Vendor Details </a>
-					  <a href="../ItemRegistration/deleteItem.php" class ="button">Delete Item </a>
-					  
-					</form> 
+				<?php
+				include_once ("../../Controller/RegisterController/delete.php");
+			
+				$query = "SELECT * FROM itemlist";
+				$result = mysqli_query($conn,$query);
 					
-	  </center>   
-   
+					
+					if ($result-> num_rows > 0){
+						while ($row = $result-> fetch_assoc()){
+							
+							$uID = $row['vendorID'];
+							
+						?>
+						
+						<tr>
+							
+						<td><?php echo $row["vendorID"];?></td>
+						<td><?php echo $row["itemType"];?></td>
+						<td><?php echo $row["itemID"];?></td>
+						<td><?php echo $row["itemName"];?></td>
+						<td><?php echo $row["itemBalance"];?></td>
+						<td><?php echo $row["RegDate"];?></td>
+						<td><?php echo $row["RegTime"];?></td>
+						<td><?php echo $row["sectionID"];?></td>
+						<td><?php echo $row["itemDesc"];?></td>
+						<td style="text-align:center;">
+						<a href="../../Controller/RegisterController/delete.php?DeleteID=<?php echo $uID ?>"><input style="background-color:red;" type="button" name="Delete" value="Delete" onclick="deleteItem()"></a></td>
+						
+						</tr>
+						<?php
+						}
+					}
+					?>
+				</table>
+						
+		</div>
+	</div>
+ 
+  </center>  
 
     
     
