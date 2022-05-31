@@ -117,7 +117,7 @@ if(isset($_POST['Confirm']))
 
 							$rest = mysqli_query($conn, $que);
 							
-							header("location: ../../View/ItemRegistration/ItemRegistration.php");
+							header("location: ../../View/ItemRegistration/ItemRegistration.php?error=Item Updated into Database");
 							exit();
 							
 				}
@@ -131,7 +131,7 @@ if(isset($_POST['Confirm']))
 
 						$result = mysqli_query($conn, $query);
 						
-						header("location: ../../View/ItemRegistration/ItemRegistration.php");
+						header("location: ../../View/ItemRegistration/ItemRegistration.php?error=Item Added into Database");
 						exit();
 				}
 		
