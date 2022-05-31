@@ -188,55 +188,25 @@ input[type=button]:hover
         <div class="row">
           <!-- single-well start-->
 
+<?php
+
+$sname= "localhost";
+$unmae= "root";
+$password = "";
+
+$db_name = "fkims";
+
+$conn = mysqli_connect($sname, $unmae, $password, $db_name);
+
+if (!$conn) {
+	echo "<br>";
+	echo "Connection failed!";
+}
+?>
  <center> 
-	 	<div class="vendor">
-		<div class="vendorlist">
-			<form method="post" action="../../Controller/VendorController/insertvendor.php">
-			<div class="input_field">
-				<label>Vendor ID</label>
-				<input type="text" name="vendorID" class="input" required>				
-			</div>
-			<div class="input_field">
-				<label>Vendor Name</label>
-				<input type="text" name="vendor_name" class="input" required>				
-			</div>
-			<div class="input_field">
-				<label>Vendor Address</label>
-				<input type="text" name="vendor_address" class="input" required>				
-			</div>
-			<div class="input_field">
-				<label>Vendor Phone Number</label>
-				<input type="text" name="vendor_phone" class="input" required>				
-			</div>
-			<div class="input_field">
-				<label>Vendor Email</label>
-				<input type="text" name="vendor_email" class="input" required>				
-			</div>
-			<div class="input_field">
-				<label>Vendor Item</label>
-				<input type="text" name="vendor_item" class="input" required>				
-			</div>
-			<div>
-				<br>
-				<input type="submit" class="btn" name="Add" value="Add" required>
-			</div>
-			<div>
-				
-			</div>
-			</form>
-		</div>
-	</div>
-	
+
 	<div class="display">
-	<br><br>
-	<form action="searchVendor.php" method="POST">
-        <div>
-            <input type="text" name="searchvendor" placeholder="Insert Vendor ID to Search..">
-            
-            <button class="button button5" type="submit">Search</button>
-        </div>
-        </form> 
-		<br><br>
+
 		<div class="ta">
 			<table style="width:100%"; style="border-collapse:collapse;">
 				<tr>
@@ -250,18 +220,17 @@ input[type=button]:hover
 				</tr>
 
 				<?php
-				include_once ("../../Controller/VendorController/insertvendor.php");
+				$search=mysqli_real_escape_string($conn,$_POST['searchvendor']);
 			
-				$query = "SELECT * FROM vendor_list";
-				$result = mysqli_query($conn,$query);
+
+                    $query = "SELECT * FROM vendor_list WHERE vendorID LIKE '$search'";
 					
-					
-					if ($result-> num_rows > 0){
-						while ($row = $result-> fetch_assoc()){
-							
-							$uID = $row['vendorID'];
-							
-						?>
+                    
+                    $result=mysqli_query($conn,$query);
+
+                            while($row=mysqli_fetch_array($result)){
+								$uID = $row['vendorID'];
+                                ?>
 						
 						<tr>
 							
@@ -278,10 +247,13 @@ input[type=button]:hover
 						</tr>
 						<?php
 						}
-					}
+
 					?>
 				</table>
-						
+			<br><br><br><br>	
+            <button class="button button5" onclick="document.location='managevendor.php'"><span>Back</span></button>
+            <br><br><br>
+            		
 		</div>
 	</div>
  
