@@ -148,12 +148,12 @@ CREATE TABLE `vendor_list` (
 --
 
 INSERT INTO `vendor_list` (`vendorID`, `vendor_name`, `vendor_email`, `vendor_address`, `vendor_phone`, `vendor_item`) VALUES
-('KEL90', 'Printing Sohor SDN.BHD', 'sohorprint@gmail.com', 'Pasir Mas, Kelantan.', '021920139', 'Baju Korporat'),
-('KL19', 'Seksyen21 store', '21store@gmail.com', '23, Lorong Chow Kit, Kuala Lumpur', '049012901', 'Multi'),
-('KUL90', 'Kedai Wahab', 'wahabpahang@gmail.com', '90,Taman Tas, Kuantan, Pahang.', '092390912', 'Stationary'),
-('PHG11', 'Kuantan Stationary', 'statkuan@yahoo.com', '34,Taman Tas, Kuantan, Pahang', '0981290212', 'Stationary'),
-('PHG32', 'SchoolKuantan SDN BHD', 'kuantansch@yahoo.com', '32,Taman Makhota, Kuantan, Pahang', '072391022', 'Stationary'),
-('TRG30', 'TerengganuHafiz Berhad', 'TrgHfz@gmail.com', 'Jalan 21, Gong Badak, Terengganu.', '062103201', 'Calendar');
+('KEL90', 'Printing Sohor SDN.BHD', 'sohorprint@gmail.com', 'Pasir Mas, Kelantan.', '6021920139', 'Baju Korporat'),
+('KL19', 'Seksyen21 store', '21store@gmail.com', '23, Lorong Chow Kit, Kuala Lumpur', '6049012901', 'Multi'),
+('KUL90', 'Kedai Wahab', 'wahabpahang@gmail.com', '90,Taman Tas, Kuantan, Pahang.', '6092390912', 'Stationary'),
+('PHG11', 'Kuantan Stationary', 'statkuan@yahoo.com', '34,Taman Tas, Kuantan, Pahang', '60981290212', 'Stationary'),
+('PHG32', 'SchoolKuantan SDN BHD', 'kuantansch@yahoo.com', '32,Taman Makhota, Kuantan, Pahang', '6072391022', 'Stationary'),
+('TRG30', 'TerengganuHafiz Berhad', 'TrgHfz@gmail.com', 'Jalan 21, Gong Badak, Terengganu.', '6062103201', 'Calendar');
 
 --
 -- Indexes for dumped tables
