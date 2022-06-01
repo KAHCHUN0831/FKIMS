@@ -139,7 +139,7 @@ CREATE TABLE `vendor_list` (
   `vendor_name` varchar(100) NOT NULL,
   `vendor_email` varchar(50) NOT NULL,
   `vendor_address` varchar(100) NOT NULL,
-  `vendor_phone` varchar(20) NOT NULL,
+  `vendor_phone` int(20) NOT NULL,
   `vendor_item` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
