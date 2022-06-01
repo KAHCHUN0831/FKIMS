@@ -106,39 +106,6 @@ input
    border-radius: 5px;
    margin: 20px auto;
 }
-
-select {
-  // A reset of styles, including removing the default dropdown arrow
-  appearance: none;
-  // Additional resets for further consistency
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-  color:black;
-}
-
-.options {
-    display:none;
-    position:absolute;
-    top:100%;
-    right:0;
-    left:0;
-    z-index:999;
-    margin:0 0;
-    padding:0 0;
-    list-style:none;
-    border:1px solid #ccc;
-    background-color:white;
-    -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);
-    box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);
-}
 </style>
 
 <script type="text/javascript"> 
@@ -223,28 +190,12 @@ select {
           <!-- single-well start-->
 		  
  <center> 
- 
- <?php
-  
-    // Connect to database 
-    $con = mysqli_connect("localhost","root","","fkims");
-         
-    // Get all the categories from user table
-    $sql = "SELECT * FROM `user` WHERE id LIKE 'AD%';";
-    $result = mysqli_query($con,$sql);
-	
-    $sql2 = "SELECT * FROM `user` WHERE id LIKE 'S%';";
-    $result2 = mysqli_query($con,$sql2);
-	
-	$sql3 = "SELECT * FROM `itemlist` ;";
-    $result3 = mysqli_query($con,$sql3);
-   
-   
-    
-?>
 
 				
-   
+     	<?php if (isset($_GET['error'])) { ?>
+     		<p class="error"><?php echo $_GET['error']; ?></p>
+     	<?php } ?>
+		
 		
 		<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>
@@ -255,91 +206,19 @@ select {
 					  <table>
 					  <tr>
 					  <th><label for="adminID">Admin ID:</label></th>
-					  <td>
-					   <select type="text"  id="adminID" name="adminID" >
-            <?php 
-             
-                while ($user = mysqli_fetch_array($result)):; 
-            ?>
-                <option value="<?php echo $user["id"];
-                   
-                ?>">
-					<?php echo $user["id"];?>
-               
-                   
-                </option>
-            <?php 
-                endwhile; 
-            ?>
-        </select>
-					  
-					  <br></td>
+					  <td><input type="text" id="adminID" name="adminID" ><br></td>
 					  </tr>
 					  <tr>
 					  <th><label for="itemID">Item ID:</label></th>
-					
-					<td>
-					   <select type="text"  id="itemID" name="itemID" >
-            <?php 
-             
-                while ($user3 = mysqli_fetch_array($result3)):; 
-            ?>
-                <option value="<?php echo $user3["itemID"];
-                   
-                ?>">
-					<?php echo $user3["itemID"];?>
-               
-                   
-                </option>
-            <?php 
-                endwhile; 
-            ?>
-        </select>
-					  
-					  
-					
-					
+					  <td><input type="text" id="itemID" name="itemID" ><br></td>
 					  </tr>
-					  
-					  
 					  <tr>
 						<th><label for="itemQuantity">Item Quantity:</label></th>
 						<td><input type="number" id="itemQuantity" name="itemQuantity" ><br></td>
 					  </tr>
 					  <tr>
-					  
-					  
 					  <th><label for="staffID">Staff ID:</label></th>
-					  
-					
-					  <td>
-					   <select type="text"  id="staffID" name="staffID" >
-            <?php 
-             
-                while ($user2 = mysqli_fetch_array($result2)):; 
-            ?>
-                <option value="<?php echo $user2["id"];
-                   
-                ?>">
-					<?php echo $user2["id"];?>
-               
-                   
-                </option>
-            <?php 
-                endwhile; 
-            ?>
-        </select>
-					  
-					  
-					  
-					  
-					  
-					  
-					  
-					  
-					  
-					  
-					  
+					  <td><input type="text" id="staffID" name="staffID" ><br></td>
 					  </tr>
 					  <tr>
 						<th><label for="date">Date:</label></th>
