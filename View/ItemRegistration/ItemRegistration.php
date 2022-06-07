@@ -52,7 +52,7 @@ input[type=submit]:hover
   background-color: Red;
 }
 
-.button {
+	     .button {
     background-color: purple;
         border-color: white;
         color: white;
@@ -65,8 +65,9 @@ input[type=submit]:hover
 		font-weight: bold;
         margin: 4px 2px;
         cursor: pointer;
-      }
-		
+    }
+	  
+	
 input[type=reset]
 {
   background-color: green;
@@ -257,12 +258,13 @@ input
 					  <center>
 					  <br>
 					  <br>
-						<input type="submit" value="Submit" name="Confirm" onclick="addItem()">
+						<input type="submit"  value="Submit" name="Confirm" onclick="addItem()">
 						<input type="reset">					
 					  </center>
-					  <a href="../ItemRegistration/VendorList.php" class ="button">Display Vendor Details </a>
-					  <a href="../ItemRegistration/deleteItem.php" class ="button">Delete Item </a>
+					 <a href="../ItemRegistration/VendorList.php" div class ="button ">Display Vendor Details </a>
+					  <a href="../ItemRegistration/deleteItem.php" div class ="button ">Delete Item </a>
 					  
+			
 					</form> 
 					
 	  </center>   

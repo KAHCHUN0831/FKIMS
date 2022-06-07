@@ -259,6 +259,8 @@ input
 					  <br>
 						<input type="submit" value="Submit" name="Confirm" onclick="addItem()">
 						<input type="reset">
+											  <br>
+					  <br>
 						<a href="../ItemRegistration/deleteItem.php" class ="button">Delete Item </a>
 					  </center>
 					  <br>
