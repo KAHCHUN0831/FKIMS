@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -176,35 +175,6 @@ th
     </div><!-- End Blog Header -->
 	
 	
-	<?php
-	$conn = mysqli_connect("localhost", "root", "", "fkims");
-	
-	if(!$conn) 
-	{ 
-		die(" Connection Error "); 
-	}
-	
-	$uID = $_GET['GetID'];
-	$query = "SELECT * FROM itemlist WHERE itemID='".$uID."'";
-
-	$result = mysqli_query($conn, $query);
-	
-	while($row=mysqli_fetch_assoc($result))
-	{
-		$iID = $row['itemID'];
-		$vID = $row['vendorID'];
-		$iType =$row['itemType'];
-		$iName = $row['itemName'];
-		$iQ = $row['itemBalance'];
-		$iPrice = $row['itemPrice'];
-		$RegDate = $row['RegDate'];
-		$RegTime = $row['RegTime'];
-		$sc = $row['sectionID'];
-		$Desc = $row['itemDesc'];
-		$stat = $row['itemStatus'];
-	}
-?>
-	
 
   	  <!-- ======= About Section ======= -->
     <div id="about" class="about-area area-padding">
@@ -212,7 +182,7 @@ th
         <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="section-headline text-center">
-              <h2>Manage Item</h2>
+              <h2>QR CODE</h2>
             </div>
           </div>
         </div>
@@ -222,64 +192,60 @@ th
  <center> 
  
 		
-		<form action="../../Controller/StockController/update.php?GetID=<?php echo $uID ?>" method="post">
-           
+		<?php
+			$conn = mysqli_connect("localhost", "root", "", "fkims");
 			
-			<h3 class="gap" style="font-size:25px";>ITEM LIST</h3>
-            
-            <table style="width:90%">
-
-                <tr>
-					<th style="text-align:center;"><label for="itemID">Item ID:</label></th>
-					<td style="text-align:center;"><input type="text" id="itemID" name="itemID" value="<?php echo $iID ?>"></td>	
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="vendorID">Vendor ID:</label></th>
-					<td style="text-align:center;"><input class="fill" type="text" id="vendorID" name="vendorID" value="<?php echo $vID ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="itemName">Item Name:</label></th>
-					<td style="text-align:center";><input class="fill" type="text" id="itemName" name="itemName" value="<?php echo $iName ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="itemType">Item Type:</label></th>
-					<td style="text-align:center"><input class="fill" type="text" id="itemType" name="itemType" value="<?php echo $iType ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="Desc">Item Description:</label></th>
-					<td style="text-align:center;"><input class="fill" type="text" id="Desc" name="Desc" value="<?php echo $Desc ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="Desc">Item Status:</label></th></th>
-					<td style="text-align:center;"><input class="fill" type="text" id="stat" name="stat" value="<?php echo $stat ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="itemQ">Item Quantity:</label></th>
-					<td style="text-align:center;"><input class="fill" type="number" id="itemQ" name="itemQ" value="<?php echo $iQ ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="Desc">Section ID:</label></th>
-					<td style="text-align:center;"><input class="fill" type="text" id="sec" name="sec" value="<?php echo $sc ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="itemPrice">Item Price:</label></th>
-					<td style="text-align:center;"><input class="fill" type="number" id="itemPrice" name="itemPrice" value="<?php echo $iPrice ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="RegDate">Item Register Date:</label></th>
-					<td style="text-align:center;"><input class="fill" type="text" id="RegDate" name="RegDate" value="<?php echo $RegDate ?>"></td>
-				</tr>
-				<tr>
-					<th style="text-align:center;"><label for="RegTime">Item Register Time:</label></th>
-					<td style="text-align:center;"><input class="fill" type="text" id="RegTime" name="RegTime" value="<?php echo $RegTime ?>"></td>
-				</tr>
+			if(!$conn) 
+			{ 
+				die(" Connection Error "); 
+			}
+			
+			if(isset($_GET['ID']))
+			{
+				$ID = $_GET['ID'];
 				
-            </table>
+				$query = "SELECT * FROM itemlist 
+							WHERE itemID = '".$ID."'";
+					
+				$result = mysqli_query($conn, $query);
+					
+				while($row=mysqli_fetch_assoc($result))
+				{
+					$iID = $row['itemID'];
+					$vID = $row['vendorID'];
+					$iType =$row['itemType'];
+					$iName = $row['itemName'];
+					$iQ = $row['itemBalance'];
+					$sc = $row['sectionID'];
+
+				}
+				
+				
+			}
+		?>
+ 
+			 
 			<br>
 			<br>
-			<input type="submit" value="Update" name="Update" onclick="update()">
-			<input type="reset">
-        </form>
+
+			  <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data=Item ID:<?php echo $iID ?>     Vendor ID:<?php echo $vID ?>     Item Type:<?php echo $iType ?>     Item Name:<?php echo $iName ?>     Item Balance:<?php echo $iQ ?>     Item Location:<?php echo $sc ?>&amp;size=100x100" alt="" title="HELLO" width="200" height="200" onload="generateBarCode();" />
+			 
+			 </center>
+
+			<script>
+			
+			function generateBarCode() 
+			{
+				var id = <?php echo $iID ?>";
+				var vd = <?php echo $vID ?>";
+				var ty = <?php echo $iType ?>";
+				var nm = <?php echo $iName ?>";
+				var bal = <?php echo $iQ ?>";
+				var sc = <?php echo $sc ?>";
+				var url = 'https://api.qrserver.com/v1/create-qr-code/?data=' + id + vd + ty + nm + bal + sc + '&amp;size=50x50';
+				$('#barcode').attr('src', url);
+			}
+			</script>
 
 				
     

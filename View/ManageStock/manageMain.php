@@ -102,6 +102,48 @@ th
 {
   background-color: #c1f0f0;
 }
+
+.dropbtn {
+  background-color: #008B8B;
+  width:80px;
+  color: white;
+  padding: 7px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border: 2px solid black;
+  border-color: black;
+  color: white; 
+  border-radius: 5px;
+  font-weight: bold;
+  margin: auto; 
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color:#66CDAA;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
 
 <script type="text/javascript"> 
@@ -213,7 +255,7 @@ th
 				
 			}
 			 else {
-				$query = "SELECT * FROM `itemlist`";
+				$query = "SELECT * FROM `itemlist` ";
 				$search_result = filterTable($query);
 			}
 
@@ -228,10 +270,47 @@ th
 		?>
 		
 		<form action="manageMain.php" method="post">
-            <input class="search" type="text" name="valueToSearch" placeholder="Value To Search">
+            <input class="search" type="text" style="width:600px;" name="valueToSearch" placeholder="Value To Vendor ID, ItemType, Item ID, Item Name, Section ID">
             <input class="gap" type="submit" name="search" value="Search"><br><br>
 			
 			<h3 class="gap" style="font-size:25px";>ITEM LIST</h3>
+
+      </center>
+      <div style="float:right;margin-bottom:10px;">
+      <div class="dropdown" style="float:right;">
+        <button class="dropbtn">Sort</button>
+        <div class="dropdown-content">
+          <a href="../../Controller/StockController/ascPrice.php?" value="AscPrice">Ascending Price</a>
+          <a href="#" value="DescPrice">Descending Price</a>
+          <a href="#" value="AscAmount">Ascending Amount</a>
+          <a href="#" value="DescAmount">Descending Amount</a>
+        </div>
+      </div>
+      </div>
+
+      <form action="" nethod="GET" style="float:right;background-color:#33475b;">
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                  <select name="sort" class="form-control">
+                    <option value="">--Select Option--</option>
+                    <option value="AscPrice" <?php if(isset($_GET['sort']) && $_GET['sort'] == "AscPrice") ?>>Ascending Price</option>
+                    <option value="DescPrice" <?php if(isset($_GET['sort']) && $_GET['sort'] == "DescPrice") ?>>Descending Price</option>
+                    <option value="AscAmount" <?php if(isset($_GET['sort']) && $_GET['sort'] == "AscAmount") ?>>Ascending Amount</option>
+                    <option value="DescAmount" <?php if(isset($_GET['sort']) && $_GET['sort'] == "DescAmount") ?>>Descending Amount</option>
+    </select>
+    <button type="submit" value="Sort" name="Sort" style="width:100px;background-color:#008B8B;color: white;font-weight: bold;" >Sort</button>
+    </div>
+    </div>
+    </div>
+    </form>
+
+
+                    
+
+
+
+
+      <center>
             
             <table style="width:100%">
                 <tr>
@@ -239,20 +318,57 @@ th
                     <th style="text-align:center;">Vendor</th>
                     <th style="text-align:center;">Name</th>
                     <th style="text-align:center;">Type</th>
+                    <th style="text-align:center;">Detail</th>
+                    <th style="text-align:center;">Status</th>
                     <th style="text-align:center;">Amount</th>
                     <th style="text-align:center;">Location</th>
+                    <th style="text-align:center;">Price</th>
+                    <th style="text-align:center;">Date</th>
+                    <th style="text-align:center;">Time</th>
                     <th style="text-align:center;"></th>
                 </tr>
+        <?php
 
-				                <tr>
-					<td style="text-align:center;">1</td>	
-					<td style="text-align:center;">2</td>
-					<td style="text-align:center;">2</td>
-					<td style="text-align:center;">2</td>
-					<td style="text-align:center;">2</td>
-					<td style="text-align:center;">2</td>
+          $sort_option="";
+          if(isset($_GET['sort']))
+          {
+            if($_GET['sort']=="AscPrice")
+            {
+              $sort_option= "ASC";
+            }
+            elseif($_GET['sort']=="DescPrice")
+            {
+              $sort_option= "DESC";
+            }
+          }
 
+          $conn = mysqli_connect("localhost", "root", "", "fkims");
+          $sortquery = "SELECT * FROM itemlist ORDER BY itemPrice $sort_option";
+          $queryrun= mysqli_query($conn,$sortquery);
+          
+          
+          ?>
 
+				<!-- populate table from mysql database -->
+                <?php while($row = mysqli_fetch_array($search_result))
+                          while($row = mysqli_fetch_array($queryrun)):
+
+					
+					$uID = $row['itemID'];
+				
+				?>
+                <tr>
+					<td style="text-align:center;"><?php echo $row['itemID'];?></td>	
+					<td style="text-align:center;"><?php echo $row['vendorID'];?></td>
+					<td style="text-align:center;"><?php echo $row['itemName'];?></td>
+					<td style="text-align:center;"><?php echo $row['itemType'];?></td>
+					<td style="text-align:center;"><?php echo $row['itemDesc'];?></td>
+					<td style="text-align:center;"><?php echo $row['itemStatus'];?></td>
+					<td style="text-align:center;"><?php echo $row['itemBalance'];?></td>
+					<td style="text-align:center;"><?php echo $row['sectionID'];?></td>
+					<td style="text-align:center;";><?php echo $row['itemPrice'];?></td>
+					<td style="text-align:center;"><?php echo $row['RegDate'];?></td>
+					<td style="text-align:center;"><?php echo $row['RegTime'];?></td>
 					
 					<td style="text-align:center;">
 					<a href="updateItem.php?GetID=<?php echo $uID ?>"><input type="button" value="Update"></a>
@@ -262,6 +378,7 @@ th
 					<a href="../../View/ManageStock/Code.php?ID=<?php echo $uID ?>"><input style="background-color:LimeGreen;" type="button" name="Code" value="  Code  "></a>
 					</td>
                 </tr>
+                <?php endwhile;?>
             </table>
   
 
