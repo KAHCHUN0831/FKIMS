@@ -259,6 +259,40 @@ th
 				$search_result = filterTable($query);
 			}
 
+      $sort_option="";
+
+      if(isset($_POST['sort']))
+          {
+            if($_POST['sort']=="AscPrice")
+            {
+              $sort_option= "ASC";
+              $query = "SELECT * FROM itemlist ORDER BY itemPrice $sort_option";
+              $search_result = filterTable($query);
+
+            }
+            elseif($_POST['sort']=="DescPrice")
+            {
+              $sort_option= "DESC";
+              $query = "SELECT * FROM itemlist ORDER BY itemPrice $sort_option";
+              $search_result = filterTable($query);
+            }
+            elseif($_POST['sort']=="AscAmount")
+            {
+              $sort_option= "ASC";
+              $query = "SELECT * FROM itemlist ORDER BY itemBalance $sort_option";
+              $search_result = filterTable($query);
+            }
+            elseif($_POST['sort']=="DescAmount")
+            {
+              $sort_option= "DESC";
+              $query = "SELECT * FROM itemlist ORDER BY itemBalance $sort_option";
+              $search_result = filterTable($query);
+            }
+          }
+
+        
+          
+
 			// function to connect and execute the query
 			function filterTable($query)
 			{
@@ -276,27 +310,15 @@ th
 			<h3 class="gap" style="font-size:25px";>ITEM LIST</h3>
 
       </center>
-      <div style="float:right;margin-bottom:10px;">
-      <div class="dropdown" style="float:right;">
-        <button class="dropbtn">Sort</button>
-        <div class="dropdown-content">
-          <a href="../../Controller/StockController/ascPrice.php?" value="AscPrice">Ascending Price</a>
-          <a href="#" value="DescPrice">Descending Price</a>
-          <a href="#" value="AscAmount">Ascending Amount</a>
-          <a href="#" value="DescAmount">Descending Amount</a>
-        </div>
-      </div>
-      </div>
-
-      <form action="" nethod="GET" style="float:right;background-color:#33475b;">
+      <form action="manageMain.php" method="post" style="float:right;background-color:#33475b;">
             <div class="col-md-4">
                 <div class="input-group mb-3">
-                  <select name="sort" class="form-control">
+                  <select name="sort" id="sort" class="form-control">
                     <option value="">--Select Option--</option>
-                    <option value="AscPrice" <?php if(isset($_GET['sort']) && $_GET['sort'] == "AscPrice") ?>>Ascending Price</option>
-                    <option value="DescPrice" <?php if(isset($_GET['sort']) && $_GET['sort'] == "DescPrice") ?>>Descending Price</option>
-                    <option value="AscAmount" <?php if(isset($_GET['sort']) && $_GET['sort'] == "AscAmount") ?>>Ascending Amount</option>
-                    <option value="DescAmount" <?php if(isset($_GET['sort']) && $_GET['sort'] == "DescAmount") ?>>Descending Amount</option>
+                    <option value="AscPrice" name="AscPrice" id="AscPrice">Ascending Price</option>
+                    <option value="DescPrice" name="DescPrice" id="DescPrice">Descending Price</option>
+                    <option value="AscAmount" name="AscAmount" id="AscAmount">Ascending Amount</option>
+                    <option value="DescAmount" name="DescAmount" id="DescAmount">Descending Amount</option>
     </select>
     <button type="submit" value="Sort" name="Sort" style="width:100px;background-color:#008B8B;color: white;font-weight: bold;" >Sort</button>
     </div>
@@ -304,16 +326,11 @@ th
     </div>
     </form>
 
-
-                    
-
-
-
-
       <center>
             
-            <table style="width:100%">
+            <table style="width:100%;">
                 <tr>
+                  <th style="text-align:center;"></th>
                     <th style="text-align:center;">Item No</th>
                     <th style="text-align:center;">Vendor</th>
                     <th style="text-align:center;">Name</th>
@@ -327,37 +344,22 @@ th
                     <th style="text-align:center;">Time</th>
                     <th style="text-align:center;"></th>
                 </tr>
-        <?php
-
-          $sort_option="";
-          if(isset($_GET['sort']))
-          {
-            if($_GET['sort']=="AscPrice")
-            {
-              $sort_option= "ASC";
-            }
-            elseif($_GET['sort']=="DescPrice")
-            {
-              $sort_option= "DESC";
-            }
-          }
-
-          $conn = mysqli_connect("localhost", "root", "", "fkims");
-          $sortquery = "SELECT * FROM itemlist ORDER BY itemPrice $sort_option";
-          $queryrun= mysqli_query($conn,$sortquery);
-          
-          
-          ?>
+       
 
 				<!-- populate table from mysql database -->
-                <?php while($row = mysqli_fetch_array($search_result))
-                          while($row = mysqli_fetch_array($queryrun)):
+
+                <?php 
+                
+                $i=1;
+                while($row = mysqli_fetch_array($search_result)):
+                        
 
 					
 					$uID = $row['itemID'];
 				
 				?>
                 <tr>
+          <td style="text-align:center;"><?php echo $i;?></td>
 					<td style="text-align:center;"><?php echo $row['itemID'];?></td>	
 					<td style="text-align:center;"><?php echo $row['vendorID'];?></td>
 					<td style="text-align:center;"><?php echo $row['itemName'];?></td>
@@ -378,7 +380,9 @@ th
 					<a href="../../View/ManageStock/Code.php?ID=<?php echo $uID ?>"><input style="background-color:LimeGreen;" type="button" name="Code" value="  Code  "></a>
 					</td>
                 </tr>
-                <?php endwhile;?>
+                <?php 
+                  $i++;
+                  endwhile;?>
             </table>
   
 
