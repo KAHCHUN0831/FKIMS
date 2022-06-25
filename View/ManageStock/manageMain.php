@@ -34,6 +34,10 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 <style>
+body
+{
+  width:100vw;"
+}
 
 input[type=button] 
 {
@@ -333,16 +337,16 @@ th
                   <th style="text-align:center;"></th>
                     <th style="text-align:center;">Item No</th>
                     <th style="text-align:center;">Vendor</th>
-                    <th style="text-align:center;">Name</th>
+                    <th style="text-align:center;width:10%;">Name</th>
                     <th style="text-align:center;">Type</th>
-                    <th style="text-align:center;">Detail</th>
+                    <th style="text-align:center;width:10%;">Detail</th>
                     <th style="text-align:center;">Status</th>
                     <th style="text-align:center;">Amount</th>
                     <th style="text-align:center;">Location</th>
-                    <th style="text-align:center;">Price</th>
-                    <th style="text-align:center;">Date</th>
+                    <th style="text-align:center;width:7%;">Price</th>
+                    <th style="text-align:center;width:9%;">Date</th>
                     <th style="text-align:center;">Time</th>
-                    <th style="text-align:center;"></th>
+                    <th style="text-align:center;width:20%;"></th>
                 </tr>
        
 
@@ -368,7 +372,7 @@ th
 					<td style="text-align:center;"><?php echo $row['itemStatus'];?></td>
 					<td style="text-align:center;"><?php echo $row['itemBalance'];?></td>
 					<td style="text-align:center;"><?php echo $row['sectionID'];?></td>
-					<td style="text-align:center;";><?php echo $row['itemPrice'];?></td>
+					<td style="text-align:center;";>RM <?php echo $row['itemPrice'];?></td>
 					<td style="text-align:center;"><?php echo $row['RegDate'];?></td>
 					<td style="text-align:center;"><?php echo $row['RegTime'];?></td>
 					
